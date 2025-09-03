@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Lunar\Models\Product;
+
 return [
     /*
      * There are different options for the connection. Since Explorer uses the Elasticsearch PHP SDK
@@ -29,11 +31,24 @@ return [
      * of the mapping possibilities can be found in the documentation of Explorer's repository.
      */
     'indexes' => [
-        'lunar_products' => [
+        'products' => [
+            'mappable' => Product::class,
+            'settings' => [
+                'analysis' => [
+                    'analyzer' => [
+                        'default' => [
+                            'tokenizer' => 'standard',
+                            'filter' => ['lowercase', 'asciifolding'],
+                        ],
+                    ],
+                ],
+            ],
             'properties' => [
-                'id' => 'keyword'
-            ]
-        ]
+                'id' => 'keyword',
+                'name' => 'text',
+                'description' => 'text',
+            ],
+        ],
     ],
 
     /**

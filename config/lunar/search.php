@@ -20,7 +20,7 @@ return [
         Lunar\Models\Collection::class,
         Lunar\Models\Customer::class,
         Lunar\Models\Order::class,
-        Lunar\Models\Product::class,
+        App\Models\Product::class,
         Lunar\Models\ProductOption::class,
 
         /*
@@ -39,9 +39,12 @@ return [
     |
     */
     'engine_map' => [
-        // Lunar\Models\Product::class => 'algolia',
-        // Lunar\Models\Order::class => 'meilisearch',
-        // Lunar\Models\Collection::class => 'meilisearch',
+        App\Models\Product::class => 'elastic',
+        Lunar\Models\Order::class => 'elastic',
+        Lunar\Models\Collection::class => 'elastic',
+        Lunar\Models\Brand::class => 'elastic',
+        Lunar\Models\Customer::class => 'elastic',
+        Lunar\Models\ProductOption::class => 'elastic',
     ],
 
     'indexers' => [
@@ -49,7 +52,7 @@ return [
         Lunar\Models\Collection::class => Lunar\Search\CollectionIndexer::class,
         Lunar\Models\Customer::class => Lunar\Search\CustomerIndexer::class,
         Lunar\Models\Order::class => Lunar\Search\OrderIndexer::class,
-        Lunar\Models\Product::class => Lunar\Search\ProductIndexer::class,
+        App\Models\Product::class => Lunar\Search\ProductIndexer::class,
         Lunar\Models\ProductOption::class => Lunar\Search\ProductOptionIndexer::class,
     ],
 
